@@ -2,7 +2,7 @@
 
 namespace App\Dtos;
 
-readonly class JwtDTO
+readonly final class JwtDTO
 {
     public function __construct(
         public string $token,
