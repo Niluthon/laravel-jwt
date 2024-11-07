@@ -13,4 +13,6 @@
 
 ## Swagger
 
-    /resources/swagger/openapi.json 
+- [Docs](http://localhost:8000/api/documentation)
+- [File](resources/swagger/openapi.json)
+     
