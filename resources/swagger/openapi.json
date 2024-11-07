@@ -1,0 +1,200 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Laravel JWT API Documentation",
+    "description": "Open API documentation",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000/api/v1",
+      "description": "Локальный сервер"
+    },
+    {
+      "url": "http://localhost:8001/api/v1",
+      "description": "Еще один локальный сервер"
+    }
+  ],
+  "paths": {
+    "/users/login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Аутентификая пользователя",
+        "operationId": "16a3e44149ebc4a7788116af584fcc66",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешный вход",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JWT"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Неверный логин или пароль"
+          }
+        }
+      }
+    },
+    "/users/profile": {
+      "get": {
+        "description": "Получить свои данные",
+        "tags": [
+          "User"
+        ],
+        "operationId": "78b54c929a62324827e185922b24e036",
+        "responses": {
+          "200": {
+            "description": "Данные успешно получены",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Вы не аутонтефицированы",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/users/logout": {
+      "post": {
+        "description": "Выход из учетный записи",
+        "tags": [
+          "User"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Успешный выход"
+          },
+          "400": {
+            "description": "Ошибка при выходе",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                }
+            }
+          },
+          "401": {
+            "description": "Вы не аутентефицированы",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "integer32"
+          },
+          "name": {
+            "type": "string",
+            "example": "Example user"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "test0@tets.com"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-30 05:30"
+          }
+        }
+      },
+      "JWT": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "example": "*.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3YxL3.*"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": " Что-то пошло не так "
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "test0@test.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "password"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "bearerFormat": "JWT",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "User",
+      "description": "User"
+    }
+  ]
+}
