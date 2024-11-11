@@ -22,7 +22,6 @@
                     "User"
                 ],
                 "description": "Аутентификая пользователя",
-                "operationId": "Войти в учетную запись",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -56,7 +55,6 @@
                 "tags": [
                     "User"
                 ],
-                "operationId": "Профиль",
                 "responses": {
                     "200": {
                         "description": "Данные успешно получены",
