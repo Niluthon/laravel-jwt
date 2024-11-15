@@ -65,11 +65,4 @@ class User extends Authenticatable implements JWTSubject
         return $builder->whereNotNull('email_verified_at');
     }
 
-    protected function name(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => strtolower($value),
-            set: fn($value) => $value
-        );
-    }
 }
