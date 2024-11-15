@@ -4,9 +4,9 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Casts\DateTime;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -60,7 +60,7 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function onlyValidated(Builder $builder): Builder
+    public function scopeValidated(Builder $builder): Builder
     {
         return $builder->whereNotNull('email_verified_at');
     }
