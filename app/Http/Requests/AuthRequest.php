@@ -33,6 +33,7 @@ class AuthRequest extends FormRequest
     {
         return [
             'required' => 'Поле :attribute не может быть пустым',
+            'email' => 'Неверный формат :attribute',
         ];
     }
 }
