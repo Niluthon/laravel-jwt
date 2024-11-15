@@ -24,6 +24,6 @@ class DateTime implements CastsAttributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): string
     {
-        return date_create($value)->format("d-m-y H:i");
+        return $value;
     }
 }
