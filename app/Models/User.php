@@ -11,6 +11,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+/**
+ * @method static UserEloquentBuilder query()
+ */
 class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
@@ -49,6 +52,11 @@ class User extends Authenticatable implements JWTSubject
         'created_at' => DateTime::class,
     ];
 
+
+    public function newEloquentBuilder($query): UserEloquentBuilder
+    {
+        return new UserEloquentBuilder($query);
+    }
 
     public function getJWTIdentifier()
     {
